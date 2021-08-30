@@ -26,7 +26,7 @@ namespace Homework_CRUT
                 employee.Surname = textBox2.Text;
                 employee.Age = int.Parse(textBox3.Text);
                 employee.Salary = int.Parse(textBox4.Text);
-                employee.Position = db.Positions.FirstOrDefault(x => x.Title == textBox5.Text);
+                employee.Position = db.Positions.FirstOrDefault(x => x.Title == textBox5.Text) ?? new Position { Title = textBox5.Text }; //буде створюватись нова posotion, якщо її ще немає в списку
                 db.Employees.Add(employee);
                 db.SaveChanges();
             }
@@ -42,7 +42,7 @@ namespace Homework_CRUT
                     MessageBox.Show(item.Id + ". " + item.Name + " " + item.Surname + ", " + item.Age + " years old, "
                         + item.Salary + "$, " + item.Position.Title + ", " + item.Tasks);
                     Console.WriteLine(item.Id + ". " + item.Name + " " + item.Surname + ", " + item.Age + " years old, "
-                        + item.Salary + "$, " + item.Position.Title + ", " + item.Tasks);
+                        + item.Salary + "$, " + item.Position.Title + ", " + item.Tasks.FirstOrDefault().Title);
                 }
             }
         }
